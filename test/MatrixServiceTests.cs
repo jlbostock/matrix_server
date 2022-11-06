@@ -15,10 +15,7 @@ public class MatrixServiceTests
     public void Echo_Successful()
     {
         // arrange
-        const string fileName = @"matrix.csv";
-        var fileStream = new FileStream(fileName, FileMode.Open);
-
-        IFormFile file = new FormFile(fileStream, 0, fileStream.Length, "file", fileName);
+        var file = CreateFormFile(@"matrix.csv");
 
         // act
         var actual = _matrixService.Echo(file);
@@ -33,10 +30,7 @@ public class MatrixServiceTests
     public void Invert_Successful()
     {
         // arrange
-        const string fileName = @"matrix.csv";
-        var fileStream = new FileStream(fileName, FileMode.Open);
-
-        IFormFile file = new FormFile(fileStream, 0, fileStream.Length, "file", fileName);
+        var file = CreateFormFile(@"matrix.csv");
 
         // act
         var actual = _matrixService.Invert(file);
@@ -51,10 +45,7 @@ public class MatrixServiceTests
     public void Flatten_Successful()
     {
         // arrange
-        const string fileName = @"matrix.csv";
-        var fileStream = new FileStream(fileName, FileMode.Open);
-
-        IFormFile file = new FormFile(fileStream, 0, fileStream.Length, "file", fileName);
+        var file = CreateFormFile(@"matrix.csv");
 
         // act
         var actual = _matrixService.FlattenAndPrint(file);
@@ -69,10 +60,7 @@ public class MatrixServiceTests
     public void Sum_Successful()
     {
         // arrange
-        const string fileName = @"matrix.csv";
-        var fileStream = new FileStream(fileName, FileMode.Open);
-
-        IFormFile file = new FormFile(fileStream, 0, fileStream.Length, "file", fileName);
+        var file = CreateFormFile(@"matrix.csv");
 
         // act
         var actual = _matrixService.Sum(file);
@@ -87,10 +75,7 @@ public class MatrixServiceTests
     public void Multiply_Successful()
     {
         // arrange
-        const string fileName = @"matrix.csv";
-        var fileStream = new FileStream(fileName, FileMode.Open);
-
-        IFormFile file = new FormFile(fileStream, 0, fileStream.Length, "file", fileName);
+        var file = CreateFormFile(@"matrix.csv");
 
         // act
         var actual = _matrixService.Multiply(file);
@@ -105,10 +90,7 @@ public class MatrixServiceTests
     public void ConvertCsvFileIntoMatrix_Successful()
     {
         // arrange
-        const string fileName = @"matrix.csv";
-        var fileStream = new FileStream(fileName, FileMode.Open);
-
-        IFormFile file = new FormFile(fileStream, 0, fileStream.Length, "file", fileName);
+        var file = CreateFormFile(@"matrix.csv");
 
         // act
         var actual = _matrixService.ConvertCsvFileIntoMatrix(file);
@@ -131,10 +113,7 @@ public class MatrixServiceTests
     public void ConvertCsvFileIntoMatrix_EmptyCsv_ThrowsException()
     {
         // arrange
-        const string fileName = @"empty.csv";
-        var fileStream = new FileStream(fileName, FileMode.Open);
-
-        IFormFile file = new FormFile(fileStream, 0, fileStream.Length, "file", fileName);
+        var file = CreateFormFile(@"empty.csv");
 
         // act
         // assert
@@ -146,10 +125,7 @@ public class MatrixServiceTests
     public void ConvertCsvFileIntoMatrix_InconsistentRowSizes_ThrowsException()
     {
         // arrange
-        const string fileName = @"invalid_row_size.csv";
-        var fileStream = new FileStream(fileName, FileMode.Open);
-
-        IFormFile file = new FormFile(fileStream, 0, fileStream.Length, "file", fileName);
+        var file = CreateFormFile(@"invalid_row_size.csv");
 
         // act
         // assert
@@ -161,10 +137,7 @@ public class MatrixServiceTests
     public void ConvertCsvFileIntoMatrix_InconsistentColSizes_ThrowsException()
     {
         // arrange
-        const string fileName = @"invalid_col_size.csv";
-        var fileStream = new FileStream(fileName, FileMode.Open);
-
-        IFormFile file = new FormFile(fileStream, 0, fileStream.Length, "file", fileName);
+        var file = CreateFormFile(@"invalid_col_size.csv");
 
         // act
         // assert
@@ -176,10 +149,7 @@ public class MatrixServiceTests
     public void ConvertCsvFileIntoMatrix_NonNumericCsv_ThrowsException()
     {
         // arrange
-        const string fileName = @"non_numeric.csv";
-        var fileStream = new FileStream(fileName, FileMode.Open);
-
-        IFormFile file = new FormFile(fileStream, 0, fileStream.Length, "file", fileName);
+        var file = CreateFormFile(@"non_numeric.csv");
 
         // act
         // assert
@@ -191,10 +161,7 @@ public class MatrixServiceTests
     public void ConvertCsvFileIntoMatrix_BadFormat_ThrowsException()
     {
         // arrange
-        const string fileName = @"bad_format.csv";
-        var fileStream = new FileStream(fileName, FileMode.Open);
-
-        IFormFile file = new FormFile(fileStream, 0, fileStream.Length, "file", fileName);
+        var file = CreateFormFile(@"bad_format.csv");
 
         // act
         // assert
@@ -206,10 +173,7 @@ public class MatrixServiceTests
     public void Sum_LargeIntegers()
     {
         // arrange
-        const string fileName = @"large_numbers.csv";
-        var fileStream = new FileStream(fileName, FileMode.Open);
-
-        IFormFile file = new FormFile(fileStream, 0, fileStream.Length, "file", fileName);
+        var file = CreateFormFile(@"large_numbers.csv");
 
         // act
         var actual = _matrixService.Sum(file);
@@ -224,10 +188,7 @@ public class MatrixServiceTests
     public void Multiply_LargeIntegers()
     {
         // arrange
-        const string fileName = @"large_numbers.csv";
-        var fileStream = new FileStream(fileName, FileMode.Open);
-
-        IFormFile file = new FormFile(fileStream, 0, fileStream.Length, "file", fileName);
+        var file = CreateFormFile(@"large_numbers.csv");
 
         // act
         var actual = _matrixService.Multiply(file);
@@ -248,5 +209,12 @@ public class MatrixServiceTests
     public void TearDown()
     {
 
+    }
+
+    private IFormFile CreateFormFile(string fileName)
+    {
+        var fileStream = new FileStream(fileName, FileMode.Open);
+        var file = new FormFile(fileStream, 0, fileStream.Length, "file", fileName);
+        return file;
     }
 }
