@@ -8,13 +8,6 @@ namespace domain.Services;
 
 public class MatrixService : IMatrixService
 {
-    private readonly ILogger<MatrixService> _logger;
-
-    public MatrixService(ILogger<MatrixService> logger)
-    {
-        _logger = logger;
-    }
-
     /// Return the matrix as a string in matrix format.
     public string Echo(IFormFile file)
     {

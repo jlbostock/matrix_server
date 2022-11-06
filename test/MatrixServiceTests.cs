@@ -9,7 +9,7 @@ namespace test;
 [TestClass]
 public class MatrixServiceTests
 {
-    private MatrixService _matrixService;
+    private MatrixService _matrixService = new MatrixService();
 
     [TestMethod]
     public void Echo_Successful()
@@ -226,8 +226,7 @@ public class MatrixServiceTests
     [TestInitialize]
     public void Setup()
     {
-        var mockLogger = new Mock<ILogger<MatrixService>>();
-        _matrixService = new MatrixService(mockLogger.Object);
+        _matrixService = new MatrixService();
     }
 
     [TestCleanup]
