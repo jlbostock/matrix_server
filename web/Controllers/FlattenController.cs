@@ -28,7 +28,7 @@ public class FlattenController : ControllerBase
 
         try
         {
-            var result = _matrixService.Flatten(file);
+            var result = _matrixService.FlattenAndPrint(file);
 
             return Ok(result);
         }

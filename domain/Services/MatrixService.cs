@@ -15,33 +15,6 @@ public class MatrixService : IMatrixService
         _logger = logger;
     }
 
-    public string Echo(List<int[]> matrix)
-    {
-        return string.Join('\n', matrix.Select(row => string.Join(',', row)));
-    }
-
-    public string Echo2(List<int[]> matrix)
-    {
-        var sb = new StringBuilder();
-
-        foreach (var row in matrix)
-        {
-            foreach (var num in row)
-            {
-                sb.Append(num);
-                sb.Append(',');
-            }
-            // remove the last appended comma
-            sb.Remove(sb.Length - 1, 1);
-
-            sb.Append('\n');
-        }
-        // remove the last appended new line
-        sb.Remove(sb.Length - 1, 1);
-
-        return sb.ToString();
-    }
-
     /// Return the matrix as a string in matrix format.
     public string Echo(IFormFile file)
     {
@@ -52,13 +25,18 @@ public class MatrixService : IMatrixService
         }
     }
 
+    public string Echo(List<int[]> matrix)
+    {
+        return string.Join('\n', matrix.Select(row => string.Join(',', row)));
+    }
+
+    /// Return the matrix as a string in matrix format where the columns and rows are inverted
     public string Invert(IFormFile file)
     {
         var matrix = ConvertCsvFileIntoMatrix(file);
         return Invert(matrix);
     }
 
-    /// Return the matrix as a string in matrix format where the columns and rows are inverted
     public string Invert(List<int[]> matrix)
     {
         var sb = new StringBuilder();
@@ -81,16 +59,21 @@ public class MatrixService : IMatrixService
         return sb.ToString();
     }
 
-    public string Flatten(IFormFile file)
+    public string FlattenAndPrint(IFormFile file)
     {
         var matrix = ConvertCsvFileIntoMatrix(file);
-        return Flatten(matrix);
+        return FlattenAndPrint(matrix);
     }
 
     /// Return the matrix as a 1 line string, with values separated by commas.
-    public string Flatten(List<int[]> matrix)
+    public string FlattenAndPrint(List<int[]> matrix)
     {
-        return String.Join(',', matrix.SelectMany(row => row));
+        return String.Join(',', Flatten(matrix));
+    }
+
+    public IEnumerable<int> Flatten(List<int[]> matrix)
+    {
+        return matrix.SelectMany(row => row);
     }
 
     /// Return the sum of the integers in the matrix.
@@ -102,7 +85,7 @@ public class MatrixService : IMatrixService
 
     public double Sum(List<int[]> matrix)
     {
-        return matrix.SelectMany(matrixRow => matrixRow).Sum(num => (double)num);
+        return Flatten(matrix).Sum(num => (double)num);
     }
     /// Return the product of the integers in the matrix.
     public double Multiply(IFormFile file)
@@ -113,11 +96,16 @@ public class MatrixService : IMatrixService
 
     public double Multiply(List<int[]> matrix)
     {
+        return Flatten(matrix).Aggregate(1d, (product, num) => product * num);
+    }
+
+    public double Multiply2(List<int[]> matrix)
+    {
         return matrix.Aggregate(1d, (product, row) =>
                 product * row.Aggregate(1d, (rowProduct, num) => rowProduct * num));
     }
 
-    private List<int[]> ConvertCsvFileIntoMatrix(IFormFile file)
+    public List<int[]> ConvertCsvFileIntoMatrix(IFormFile file)
     {
         using (var stream = file.OpenReadStream())
         using (var reader = new StreamReader(stream))
@@ -162,7 +150,7 @@ public class MatrixService : IMatrixService
 
             if (matrix.Count != matrixWidth)
             {
-                throw new InvalidMatrixException("csv matrix file rows and columns lengths do not match");
+                throw new InvalidMatrixException("csv matrix file has inconsistent column lengths");
             }
 
             return matrix;

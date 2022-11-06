@@ -15,7 +15,7 @@
   </Target>
 
   <ItemGroup>
-    <MySourceFiles Include="matrix.csv;" />
+    <MySourceFiles Include="./Data/matrix.csv;./Data/empty.csv;./Data/large_numbers.csv;./Data/invalid_row_size.csv;./Data/invalid_col_size.csv;./Data/non_numeric.csv;" />
     
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.1.0" />
     <PackageReference Include="moq" Version="4.18.2" />
