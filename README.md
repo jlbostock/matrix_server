@@ -2,7 +2,7 @@
 
 ## How to run
 
-1. install [dotnet 6 SDK](www.example.com)
+1. install [dotnet 6 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/6.0)
 2. git clone
 3. to build the solution, run ```dotnet build league_matrix.sln```
 4. to run the web api, run ```dotnet run --project ./web/web.csproj```
