@@ -188,6 +188,21 @@ public class MatrixServiceTests
     }
 
     [TestMethod]
+    public void ConvertCsvFileIntoMatrix_BadFormat_ThrowsException()
+    {
+        // arrange
+        const string fileName = @"bad_format.csv";
+        var fileStream = new FileStream(fileName, FileMode.Open);
+
+        IFormFile file = new FormFile(fileStream, 0, fileStream.Length, "file", fileName);
+
+        // act
+        // assert
+        const string expectedMessage = "csv matrix file contains non-numeric values";
+        Assert.ThrowsException<InvalidMatrixException>(() => _matrixService.ConvertCsvFileIntoMatrix(file), expectedMessage);
+    }
+
+    [TestMethod]
     public void Sum_LargeIntegers()
     {
         // arrange
