@@ -99,12 +99,6 @@ public class MatrixService : IMatrixService
         return Flatten(matrix).Aggregate(1d, (product, num) => product * num);
     }
 
-    public double Multiply2(List<int[]> matrix)
-    {
-        return matrix.Aggregate(1d, (product, row) =>
-                product * row.Aggregate(1d, (rowProduct, num) => rowProduct * num));
-    }
-
     public List<int[]> ConvertCsvFileIntoMatrix(IFormFile file)
     {
         using (var stream = file.OpenReadStream())
