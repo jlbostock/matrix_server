@@ -168,7 +168,7 @@ public class MatrixServiceTests
 
         // act
         // assert
-        const string expectedMessage = "csv matrix file has inconsistent column lengths";
+        const string expectedMessage = "csv matrix file must have equal row and column lengths";
         Assert.ThrowsException<InvalidMatrixException>(() => _matrixService.ConvertCsvFileIntoMatrix(file), expectedMessage);
     }
 

@@ -137,7 +137,7 @@ public class MatrixService : IMatrixService
 
             if (matrix.Count != matrixWidth)
             {
-                throw new InvalidMatrixException("csv matrix file has inconsistent column lengths");
+                throw new InvalidMatrixException("csv matrix file must have equal row and column lengths");
             }
 
             return matrix;
