@@ -52,13 +52,13 @@ public class MatrixService : IMatrixService
         return sb.ToString();
     }
 
+    /// Return the matrix as a 1 line string, with values separated by commas.
     public string FlattenAndPrint(IFormFile file)
     {
         var matrix = ConvertCsvFileIntoMatrix(file);
         return FlattenAndPrint(matrix);
     }
 
-    /// Return the matrix as a 1 line string, with values separated by commas.
     public string FlattenAndPrint(List<int[]> matrix)
     {
         return String.Join(',', Flatten(matrix));
