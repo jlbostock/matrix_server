@@ -17,12 +17,6 @@ public class EchoController : ControllerBase
         _matrixService = matrixService;
     }
 
-    [HttpGet]
-    public string Get()
-    {
-        return "Hello World";
-    }
-
     public IActionResult Post()
     {
         var file = Request.Form.Files["file"];
