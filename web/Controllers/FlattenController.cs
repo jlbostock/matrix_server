@@ -8,10 +8,10 @@ namespace league.Controllers;
 [Route("[controller]")]
 public class FlattenController : ControllerBase
 {
-    private readonly ILogger<MatrixController> _logger;
+    private readonly ILogger<FlattenController> _logger;
     private readonly IMatrixService _matrixService;
 
-    public FlattenController(ILogger<MatrixController> logger, IMatrixService matrixService)
+    public FlattenController(ILogger<FlattenController> logger, IMatrixService matrixService)
     {
         _logger = logger;
         _matrixService = matrixService;

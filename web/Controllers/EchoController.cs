@@ -8,10 +8,10 @@ namespace league.Controllers;
 [Route("[controller]")]
 public class EchoController : ControllerBase
 {
-    private readonly ILogger<MatrixController> _logger;
+    private readonly ILogger<EchoController> _logger;
     private readonly IMatrixService _matrixService;
 
-    public EchoController(ILogger<MatrixController> logger, IMatrixService matrixService)
+    public EchoController(ILogger<EchoController> logger, IMatrixService matrixService)
     {
         _logger = logger;
         _matrixService = matrixService;

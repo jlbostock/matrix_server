@@ -8,10 +8,10 @@ namespace league.Controllers;
 [Route("[controller]")]
 public class InvertController : ControllerBase
 {
-    private readonly ILogger<MatrixController> _logger;
+    private readonly ILogger<InvertController> _logger;
     private readonly IMatrixService _matrixService;
 
-    public InvertController(ILogger<MatrixController> logger, IMatrixService matrixService)
+    public InvertController(ILogger<InvertController> logger, IMatrixService matrixService)
     {
         _logger = logger;
         _matrixService = matrixService;

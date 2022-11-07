@@ -8,10 +8,10 @@ namespace league.Controllers;
 [Route("[controller]")]
 public class MultiplyController : ControllerBase
 {
-    private readonly ILogger<MatrixController> _logger;
+    private readonly ILogger<MultiplyController> _logger;
     private readonly IMatrixService _matrixService;
 
-    public MultiplyController(ILogger<MatrixController> logger, IMatrixService matrixService)
+    public MultiplyController(ILogger<MultiplyController> logger, IMatrixService matrixService)
     {
         _logger = logger;
         _matrixService = matrixService;

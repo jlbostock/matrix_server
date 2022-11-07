@@ -8,10 +8,10 @@ namespace league.Controllers;
 [Route("[controller]")]
 public class SumController : ControllerBase
 {
-    private readonly ILogger<MatrixController> _logger;
+    private readonly ILogger<SumController> _logger;
     private readonly IMatrixService _matrixService;
 
-    public SumController(ILogger<MatrixController> logger, IMatrixService matrixService)
+    public SumController(ILogger<SumController> logger, IMatrixService matrixService)
     {
         _logger = logger;
         _matrixService = matrixService;
