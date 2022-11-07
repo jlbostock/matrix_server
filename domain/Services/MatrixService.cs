@@ -2,7 +2,6 @@ using domain.Exceptions;
 using domain.Services.Contracts;
 using System.Text;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Logging;
 
 namespace domain.Services;
 
