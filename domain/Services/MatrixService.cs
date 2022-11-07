@@ -8,7 +8,16 @@ namespace domain.Services;
 
 public class MatrixService : IMatrixService
 {
-    /// Return the matrix as a string in matrix format.
+    //
+    // Summary:
+    //     Takes a csv file containing a matrix and outputs it in string format.
+    //
+    // Parameters:
+    //   file:
+    //     A file containing a matrix in csv format.
+    //
+    // Returns:
+    //     A string representation of the matrix.
     public string Echo(IFormFile file)
     {
         using (var stream = file.OpenReadStream())
@@ -23,7 +32,16 @@ public class MatrixService : IMatrixService
         return string.Join('\n', matrix.Select(row => string.Join(',', row)));
     }
 
-    /// Return the matrix as a string in matrix format where the columns and rows are inverted
+    //
+    // Summary:
+    //     Takes a csv file containing a matrix and outputs a transposed version of it in string format.
+    //
+    // Parameters:
+    //   file:
+    //     A file containing a matrix in csv format.
+    //
+    // Returns:
+    //     A string representation of the transposed matrix.
     public string Invert(IFormFile file)
     {
         var matrix = ConvertCsvFileIntoMatrix(file);
@@ -52,7 +70,16 @@ public class MatrixService : IMatrixService
         return sb.ToString();
     }
 
-    /// Return the matrix as a 1 line string, with values separated by commas.
+    //
+    // Summary:
+    //     Takes a csv file containing a matrix and outputs its entire contents in one line.
+    //
+    // Parameters:
+    //   file:
+    //     A file containing a matrix in csv format.
+    //
+    // Returns:
+    //     A one line string representation of the matrix's contents.
     public string FlattenAndPrint(IFormFile file)
     {
         var matrix = ConvertCsvFileIntoMatrix(file);
@@ -69,7 +96,16 @@ public class MatrixService : IMatrixService
         return matrix.SelectMany(row => row);
     }
 
-    /// Return the sum of the integers in the matrix.
+    //
+    // Summary:
+    //     Takes a csv file containing a matrix and outputs the sum of all numbers in it.
+    //
+    // Parameters:
+    //   file:
+    //     A file containing a matrix in csv format.
+    //
+    // Returns:
+    //     The sum of the matrix's contents.
     public double Sum(IFormFile file)
     {
         var matrix = ConvertCsvFileIntoMatrix(file);
@@ -80,7 +116,17 @@ public class MatrixService : IMatrixService
     {
         return Flatten(matrix).Sum(num => (double)num);
     }
-    /// Return the product of the integers in the matrix.
+
+    //
+    // Summary:
+    //     Takes a csv file containing a matrix and outputs the product of all numbers in it.
+    //
+    // Parameters:
+    //   file:
+    //     A file containing a matrix in csv format.
+    //
+    // Returns:
+    //     The product of the matrix's contents.
     public double Multiply(IFormFile file)
     {
         var matrix = ConvertCsvFileIntoMatrix(file);
@@ -92,6 +138,16 @@ public class MatrixService : IMatrixService
         return Flatten(matrix).Aggregate(1d, (product, num) => product * num);
     }
 
+    //
+    // Summary:
+    //     Takes a csv file containing a matrix and converts the contents into a List of integer Arrays containing the contents of each row.
+    //
+    // Parameters:
+    //   file:
+    //     A file containing a matrix in csv format.
+    //
+    // Returns:
+    //     A matrix in the form of a List of interger Arrays.
     public List<int[]> ConvertCsvFileIntoMatrix(IFormFile file)
     {
         using (var stream = file.OpenReadStream())
